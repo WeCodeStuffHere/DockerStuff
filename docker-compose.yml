@@ -24,7 +24,7 @@ services:
       - "8080:8080"
   bot:
       build:
-        context: ../../OneDrive/Työpöytä
+        context: ./javabot
         dockerfile: Dockerfile
       restart: unless-stopped
       container_name: bot
@@ -40,7 +40,6 @@ services:
       - 1234:80
     environment:
       - PMA_ARBITRARY=1
-
 networks:
   default:
     driver: bridge
