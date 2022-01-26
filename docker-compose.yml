@@ -17,29 +17,21 @@ services:
       - "3306:3306"
 
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
   bot:
       build:
         context: ./javabot
         dockerfile: Dockerfile
       restart: unless-stopped
       container_name: bot
-      env_file:
-        - .env
       depends_on:
         - db
 
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    ports:
-      - 1234:80
-    environment:
-      - PMA_ARBITRARY=1
+  lb-api:
+    build:
+      context: ./lb-api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+
 networks:
   default:
     driver: bridge
